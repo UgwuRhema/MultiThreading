@@ -27,7 +27,7 @@ main(void)
 		exit(1);
 	} else {
 		int status;
-		waitpid(pid, &status, 0);
+		//waitpid(pid, &status, 0);
 		sleep(2);
 		printf("Parent process, ran child %d and has completed\n", (int)pid);
 	}
