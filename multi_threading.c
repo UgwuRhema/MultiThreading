@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 void *
 function(void *args)
@@ -25,7 +26,10 @@ main(void)
 		perror("Fork Failed!");
 		exit(1);
 	} else {
-		printf("Parent process, waiting for child...");
+		int status;
+		waitpid(pid, &status, 0);
+		sleep(2);
+		printf("Parent process, ran child %d and has completed\n", (int)pid);
 	}
 	return 0;
 }
