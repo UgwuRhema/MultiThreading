@@ -1,0 +1,6 @@
+cflags = -Wall -Wextra -g -O0 -march=native
+
+rule cc
+    command = gcc $cflags $in -o $out
+
+build source: cc ./multi_threading.c
