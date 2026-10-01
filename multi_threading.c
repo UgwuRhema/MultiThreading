@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <unistd.h>
 
 void *
 function(void *args)
@@ -16,6 +17,15 @@ main(void)
 {
 	pthread_t thread_main;
 	pthread_create(&thread_main, NULL, &function, NULL);
-	pthread_join(thread_main, NULL);
+	pid_t pid = fork();
+	if (pid == 0)
+	{
+		pthread_join(thread_main, NULL);
+	} else if (pid < 0){
+		perror("Fork Failed!");
+		exit(1);
+	} else {
+		printf("Parent process, waiting for child...");
+	}
 	return 0;
 }
