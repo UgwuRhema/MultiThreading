@@ -2,5 +2,8 @@ cflags = -Wall -Wextra -g -O0 -march=native
 
 rule cc
     command = gcc $cflags $in -o $out
+rule cpp
+	command = g++ $cflags $in -o $out
 
 build source: cc ./multi_threading.c
+build source2: cpp ./multi_threading.cpp
